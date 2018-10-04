@@ -1,0 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+.rouge,
+.list-group-item-action.rouge,
+.list-group-item-action:focus.rouge,
+.list-group-item-action:hover.rouge { color: crimson; }
