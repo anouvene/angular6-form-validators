@@ -2,20 +2,7 @@ import { Component, OnChanges, OnInit, AfterViewInit, Input, SimpleChange } from
 
 @Component({
   selector: 'app-fruit',
-  template: `
-    <h3>Fruits <ng-content></ng-content></h3> 
-    <ul class="list-group">
-      <li *ngFor="let fruit of fruits; let i = index" 
-          class="list-group-item list-group-item-action" 
-          (click)="clickFruit(i)" [appColor]="i === selectedFruitIndex"> 
-          {{ fruit }}  <span *ngIf="i === selectedFruitIndex">{{ selectedFruitIndex }}</span>
-      </li>
-    </ul>
-
-    <h3>Logs</h3>
-    <div *ngFor="let log of changeLog">{{ log }}</div>
-
-  `,
+  templateUrl: './fruit.component.html',
   styles: [`ul { list-style: none; margin: 0; padding: 0; }`]
 })
 export class FruitComponent implements OnChanges, OnInit {

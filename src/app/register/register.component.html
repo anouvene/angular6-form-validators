@@ -1,0 +1,154 @@
+<hr>
+<h3>Register</h3>
+<div class="col-8 mx-auto">
+  <form [formGroup]="registerGroup" novalidate>
+    <!--Nom & Prénom-->
+    <div class="form-group row position-relative">
+      <label>Prénom et nom</label>
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        formControlName="name"
+        placeholder="prénom & nom"
+        [appColor]="registerGroup.get('name').dirty && registerGroup.get('name').hasError('required')"
+        [ngClass]="{
+         'is-valid': registerGroup.get('name').valid,
+         'is-invalid': registerGroup.get('name').invalid
+         && registerGroup.get('name').dirty && registerGroup.get('name').hasError('required')}">
+
+      <div class="valid-feedback feedback-icon">
+        <i class="fa fa-check"></i>
+      </div>
+      <div class="invalid-feedback feedback-icon">
+        <i class="fa fa-times"></i>
+      </div>
+    </div>
+
+    <!--Email group-->
+    <div formGroupName="emailGroup">
+      <!--Email-->
+      <div class="form-group row position-relative">
+        <label>Email</label>
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          formControlName="email"
+          placeholder="adresse email"
+          required
+          [ngClass]="{
+            'is-valid': emailGroup.get('email').valid,
+            'is-invalid': emailGroup.get('email').invalid && emailGroup.get('email').dirty
+          }"
+          appColor appEmailValidator>
+
+        <div class="valid-feedback feedback-icon">
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="invalid-feedback feedback-icon">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+
+      <!--Confirmation Email-->
+      <div class="form-group row position-relative">
+        <label>Confirmation email</label>
+        <input
+          class="form-control"
+          type="email"
+          name="confirmEmail"
+          formControlName="confirmEmail"
+          placeholder="confirmation adresse email"
+          [ngClass]="{
+            'is-valid': emailGroup.get('confirmEmail').valid
+            && !emailGroup.hasError('emailGroupError'),
+            'is-invalid': emailGroup.get('confirmEmail').invalid && emailGroup.get('confirmEmail').dirty
+            || emailGroup.hasError('emailGroupError')
+          }"
+          appColor appEmailValidator>
+
+        <div class="valid-feedback feedback-icon">
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="invalid-feedback feedback-icon">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+    </div>
+
+    <!--Password group-->
+    <div formGroupName="passwordGroup">
+      <!--Password-->
+      <div class="form-group row position-relative">
+        <label>Mot de passe</label>
+        <input
+          class="form-control"
+          type="password"
+          name="password"
+          formControlName="password"
+          placeholder="Mot de passe"
+          [ngClass]="{
+            'is-valid': passwordGroup.get('password').valid,
+            'is-invalid': passwordGroup.get('password').invalid && passwordGroup.get('password').dirty
+          }"
+          appColor>
+
+        <div class="valid-feedback feedback-icon">
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="invalid-feedback feedback-icon">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+
+      <!--Password confirm-->
+      <div class="form-group row position-relative">
+        <label>Confirmation mot de passe</label>
+        <input
+          class="form-control"
+          type="password"
+          name="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirmation mot de passe"
+          [ngClass]="{
+            'is-valid': passwordGroup.get('confirmPassword').valid && !passwordGroup.hasError('passwordGroupError'),
+            'is-invalid': passwordGroup.get('confirmPassword').invalid && passwordGroup.get('confirmPassword').dirty
+            || passwordGroup.hasError('passwordGroupError')
+          }"
+          appColor>
+
+        <div class="valid-feedback feedback-icon">
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="invalid-feedback feedback-icon">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <!--Validation-->
+    <div class="btn btn-toolbar">
+      <div class="btn btn-group">
+        <button class="btn btn-primary" [disabled]="registerGroup.invalid">Inscription</button>
+      </div>
+      <div class="btn btn-group">
+        <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
+      </div>
+      <div class="btn btn-group">
+        <a class="btn btn-light" routerLink="./bis">Register bis</a>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--Logs-->
+<hr>
+<div class="col-6 mx-auto">
+  <p>Value: {{ registerGroup.value | json }}</p>
+  <p>Status: {{ registerGroup.status | json }}</p>
+</div>
+
+<!--Register bis-->
+<router-outlet></router-outlet>

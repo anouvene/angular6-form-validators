@@ -1,0 +1,12 @@
+<h3>Fruits <ng-content></ng-content></h3>
+<ul class="list-group">
+  <li *ngFor="let fruit of fruits; let i = index"
+      class="list-group-item list-group-item-action"
+      (click)="clickFruit(i)"
+      [appColor]="i === selectedFruitIndex" appColor>
+    {{ fruit }}  <span *ngIf="i === selectedFruitIndex">{{ selectedFruitIndex }}</span>
+  </li>
+</ul>
+
+<h3>Logs</h3>
+<div *ngFor="let log of changeLog">{{ log }}</div>

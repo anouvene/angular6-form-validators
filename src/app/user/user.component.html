@@ -1,0 +1,40 @@
+<form novalidate>
+  <h3>Inscription</h3>
+  <input [value]="nom"
+         (input)="nom=$event.target.value">
+  <div appColor>{{ nom }}</div>
+
+  <input name="nom" [(ngModel)]="nom">
+</form>
+
+<hr>
+<div class="col-8 mx-auto">
+  <form [formGroup]="inscriptionForm" (submit)="register()">
+    <!--Login-->
+    <div class="row form-group">
+      <label for="firstname">Nom</label>
+      <input id="firstname" type="text" class="form-control" formControlName="firstname">
+    </div>
+    <div class="alert alert-warning"
+         *ngIf="inscriptionForm.get('firstname').hasError('matchingNameError')">
+      <strong>Oops !</strong> "{{ inscriptionForm.get('firstname').value }}" is used <br>
+      <i>Please choice another login</i>
+    </div>
+
+    <!--Email-->
+    <div class="row form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" class="form-control" formControlName="email">
+    </div>
+
+    <!--Confirmation email-->
+    <div class="row form-group">
+      <label for="confirmemail">Confirmation email</label>
+      <input id="confirmemail" type="email" class="form-control" formControlName="confirmemail">
+    </div>
+    <div class="row form-group">
+      <input type="submit" class="btn btn-primary" value="Valider" [disabled]="inscriptionForm.invalid">
+    </div>
+
+  </form>
+</div>

@@ -2,4 +2,13 @@
 .rouge,
 .list-group-item-action.rouge,
 .list-group-item-action:focus.rouge,
-.list-group-item-action:hover.rouge { color: crimson; }
+.list-group-item-action:hover.rouge, .form-control.rouge, .form-control:focus.rouge { color: crimson; border: solid 1px crimson;}
+
+.valid-feedback.feedback-icon,
+.invalid-feedback.feedback-icon {
+  position: absolute;
+  width: auto;
+  bottom: 10px;
+  right: 10px;
+  margin-top: 0;
+}

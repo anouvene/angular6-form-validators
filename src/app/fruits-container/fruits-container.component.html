@@ -1,0 +1,9 @@
+<app-fruit [countFruits]="countFruits()" #fruit>
+  <table align="center">
+    <tr>
+      <td><button (click)="increase()" class="badge badge-light">+</button></td>
+      <td><button (click)="decrease()" class="badge badge-light"> - </button></td>
+      <td rowspan="2"><span class="badge badge-secondary">{{ countFruits() }}</span></td>
+    </tr>
+  </table>
+</app-fruit>

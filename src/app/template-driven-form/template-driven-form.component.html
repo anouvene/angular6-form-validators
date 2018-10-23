@@ -1,0 +1,95 @@
+<h3>Register</h3>
+<div class="col-8 mx-auto">
+  <form #registerGroup="ngForm" (submit)="register(registerGroup.value)">
+    <!--Nom-->
+    <div class="form-group row position-relative">
+      <label>Nom</label>
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        ngModel
+        #name="ngModel"
+        placeholder="Nom"
+        required
+        [ngClass]="{
+         'is-valid': name.valid,
+         'is-invalid': name.invalid
+         && (name.dirty || name.touched)
+         }"
+        appColor>
+
+      <div class="valid-feedback feedback-icon">
+        <i class="fa fa-check"></i>
+      </div>
+      <div class="invalid-feedback feedback-icon">
+        <i class="fa fa-times"></i>
+      </div>
+    </div>
+
+    <!--Email group-->
+    <div ngModelGroup="emailGroup" #emailGroup="ngModelGroup" appEmailGroupValidator>
+      <!--Email-->
+      <div class="form-group row position-relative">
+        <label>Email</label>
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          ngModel
+          #email="ngModel"
+          placeholder="adresse email"
+          required
+          appEmailValidator
+          [ngClass]="{
+            'is-valid': email.valid,
+            'is-invalid': email.invalid && (email.dirty || email.touched)
+          }"
+          appColor>
+
+        <div class="valid-feedback feedback-icon">
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="invalid-feedback feedback-icon">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+
+      <!--Confirmation Email-->
+      <div class="form-group row position-relative">
+        <label>Confirmation email</label>
+        <input
+          class="form-control"
+          type="email"
+          name="confirmEmail"
+          ngModel
+          #confirmEmail="ngModel"
+          placeholder="confirmation adresse email"
+          required
+          appEmailValidator
+          [ngClass]="{
+          'is-valid': confirmEmail.valid && !emailGroup.errors,
+          'is-invalid': confirmEmail.invalid && (confirmEmail.dirty || confirmEmail.touched)
+          || emailGroup.errors && (confirmEmail.dirty || confirmEmail.touched)
+          }"
+          appColor>
+
+        <div class="valid-feedback feedback-icon">
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="invalid-feedback feedback-icon">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+    </div>
+
+    <!--Validation-->
+    <div class="btn btn-toolbar">
+      <div class="btn btn-group">
+        <button class="btn btn-primary" [disabled]="registerGroup.invalid">Inscription</button>
+      </div>
+    </div>
+
+    <!--<i> Erreur confirmation email: {{ emailGroup.errors | json}} </i>-->
+  </form>
+</div>

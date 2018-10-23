@@ -16,9 +16,7 @@ export class ColorDirective  implements OnInit {
   constructor(private element: ElementRef, private renderer: Renderer2){
   }
 
-  @HostBinding('style.color') color: string = 'grey';
-
-
+  @HostBinding('style.color') color: string = 'black';
   @HostListener('window:keydown', ['$event']) windowKeydown($event) {
     const key = $event.key;
     switch(key) {
@@ -29,25 +27,25 @@ export class ColorDirective  implements OnInit {
         this.color = KeyCodesModel.Down;
         break;
       default:
-        this.color = 'black';
+        this.color = '';
         break;
     }
   }
 
-  @Input() set appColor(isEqualIndex: boolean) {
-    if (isEqualIndex) {
-      this.isClickedClass = isEqualIndex;
+  @HostBinding('class.rouge') isClickedClass: boolean = false;
+  @Input() set appColor(isEqual: boolean) {
+    this.color = ''; // Ne pas appliquer le style 'color' défini justa avant
+    if (isEqual) {
+      this.isClickedClass = isEqual; // appliquer class="rouge" car isEqualIndex = true
     } else {
       this.isClickedClass = false;
     }
   }
 
-  @HostBinding('class.rouge') isClickedClass: boolean = false;
-
   ngOnInit() {
     let el = this.element.nativeElement;
-    el.style.cssText = "text-decoration: underline;";
-    el.setAttribute('style', 'background-color: yellow; text-transform: lowercase;');
+    // el.style.cssText = "text-decoration: underline;";
+    // el.setAttribute('style', 'background-color: yellow; text-transform: lowercase;');
     this.renderer.setStyle(el, 'font', 'italic bold 12px/30px Helvetica, serif');
   }
 
